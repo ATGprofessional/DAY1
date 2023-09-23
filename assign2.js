@@ -1,19 +1,40 @@
 const express = require('express');
 const app = express();
 
-let Note = ["Note1","Note2","Note3"]
+let Notes = [
+    {
+        "id" : 1,
+        "title" : "Samsung",
+        "description" : "Moblie"
+    },
+    {
+        "id" : 2,
+        "name" : "Lenevo",
+        "description" : "Laptop"
+    },
+    {
+        "id" : 3,
+        "name" : "Hauwei",
+        "description" : "Tablet"
+    }
+]
+
 app.get('/',(req,res)=>{
-        res.send(Note)   
+    res.send("Welcome")   
+}
+)
+app.get('/notes',(req,res)=>{
+        res.send(Notes)   
    }
 )
+
 app.get('/notes/:id',(req,res) => {
-    const id = req.params.id;
-    for (let i = 0; i < NOTES.length; i++){
-        if(NOTES[i].id==id){
-            res.send(NOTES[i]);
+        const id = req.params.id;
+        for (let i = 0; i < Notes.length; i++){
+            if(Notes[i].id== id){
+                res.send(Notes[i]);
+            }
         }
-    }
-    res.send("NOTES not found");
- }
-)
+        res.send("NOTES not found");
+    })
 app.listen(3030)
