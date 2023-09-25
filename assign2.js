@@ -32,9 +32,9 @@ app.get('/notes/:id',(req,res) => {
         const id = req.params.id;
         for (let i = 0; i < Notes.length; i++){
             if(Notes[i].id== id){
-                res.send(Notes[i]);
+                return res.send(Notes[i]);
             }
         }
         res.send("NOTES not found");
-    })
+    });
 app.listen(3030)
