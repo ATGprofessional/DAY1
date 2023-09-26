@@ -56,7 +56,7 @@ app.post('/todos',(req,res)=>{
     let item={
         id : todoList.length+1,
         title,
-        completed
+        completed : false
     }
     todoList.push(item)
     return res.send(item)
@@ -88,6 +88,16 @@ app.delete('/todos/:id',(req,res)=>{
             return res.status(404).send('No Such Data Exist')
 })
 // create a PATCH/PUT route to update a todo status
+app.patch('/todo/:id',(req,res)=>{
+    let id = req.params.id
+    for(let i=0;i<todoList.length;i++){
+        if(todoList[i].id==id){
+            todoList[i].completed=!todoList[i].completed
+            return res.send(todoList[i])
+        }
+    }
+    res.status(404).send(`No todo with id: ${id} is found`)
+})
 
 // create a fallback route for all other routes.
 app.use((req,res)=>{
